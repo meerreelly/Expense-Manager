@@ -29,6 +29,18 @@ public class CategoryController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        return View(category);
+
+        return Problem();
+    }
+
+    public async Task<IActionResult> Delete(Guid? id)
+    {
+        var todo = await _context.Categories.FindAsync(id);
+        if (todo != null)
+        {
+            _context.Categories.Remove(todo);
+            await _context.SaveChangesAsync();
+        }
+        return RedirectToAction("Index");
     }
 }

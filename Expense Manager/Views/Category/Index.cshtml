@@ -1,0 +1,36 @@
+@model IEnumerable<Category>
+@{
+    ViewBag.Title = "Category";
+    Layout = "_Layout";
+}
+
+<h2>Категорії</h2>
+
+<div>
+    <form asp-controller="Category"  asp-action="Create" method="post">
+        <div class="input-group mb-3">
+            <input type="text" name="Name" class="form-control" placeholder="Category Name" aria-describedby="button-addon2" required>
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add</button>
+        </div>
+    </form>
+    
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Назва категорії</th>
+        <th scope="col">Дії</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CategoryId">Видалити</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
